@@ -44,7 +44,7 @@ class App extends React.Component {
       
       <div className="App">
         <div className='app-container'>
-          <UsersList users={this.state.users} handleClick={this.handleUserButtonClick.bind(this)}/>
+          <UsersList users={this.state.users} tabAvailable={this.state.cardVisible ? "-1" : "0"}  handleClick={this.handleUserButtonClick.bind(this)}/>
           <UserCard user={this.state.selected} visible={this.state.cardVisible} handleClose={_ => this.handleCloseCard()} />
         </div>  
       </div>
