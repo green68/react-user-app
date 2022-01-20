@@ -1,13 +1,13 @@
 import React from 'react'
 import UserButton from './UserButton';
 
-const UsersList = ({users, handleClick}) => {
+const UsersList = ({users, tabAvailable, handleClick}) => {
 
   if (! Array.isArray(users)) return (<div>Erreur de chargement</div>)
-  
+
   const list = users.map(user => {
     return (
-      <UserButton key={user.id} user={user} handleClick={handleClick} />
+      <UserButton key={user.id} user={user} tabAvailable={tabAvailable} handleClick={handleClick} />
     );
   })
 
