@@ -1,25 +1,57 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import UserCard from './UserCard';
+import UsersList from './UsersList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      users: [],
+      selected: null,
+      cardVisible: false,
+    }
+  }
+
+  fetchUsers() {
+    const url = 'https://jsonplaceholder.typicode.com/users'
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ 
+          users: data,
+        })
+      })
+  }
+
+  handleUserButtonClick(user) {
+    if (!user) return null
+    this.setState({ selected: user })
+    this.setState({ cardVisible: true })
+  }
+
+  handleCloseCard() {
+    this.setState({cardVisible: false})
+  }
+
+  componentDidMount() {
+    this.fetchUsers()
+  }
+
+  render() {
+   
+    return (
+      
+      <div className="App">
+        <div className='app-container'>
+          <UsersList users={this.state.users} handleClick={this.handleUserButtonClick.bind(this)}/>
+          <UserCard user={this.state.selected} visible={this.state.cardVisible} handleClose={_ => this.handleCloseCard()} />
+        </div>  
+      </div>
+    );
+  }
 }
+
+
 
 export default App;

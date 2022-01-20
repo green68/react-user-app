@@ -1,16 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  max-width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  /* position: relative; */
+  /* flex-wrap: wrap; */
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -28,11 +31,78 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-container {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  display: flex;
+
+}
+
+.card,
+.users-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  min-width: 30ch;
+  max-width: max(30ch, 50vw);
+  width: 100%;
+}
+
+.users-list h1 {
+  margin: 0 0 .5em 0;
+}
+
+.card {
+  --duration: 200ms;
+  background-color: aquamarine;
+  position: absolute;
+  top: 1rem;
+  border-radius: .5rem;
+  padding: 1rem;
+  /* min-height: 40ch; */
+  height: calc(100% - 2rem);
+  animation-duration: 200ms;
+  width: calc(100% - 1rem);
+}
+
+.card-hidden{
+  animation: slideOut linear var(--duration);
+  left: 100%;
+}
+
+.card-show {
+  animation: slideIn linear var(--duration);
+  left: 1rem;
+}
+
+@keyframes slideIn {
+  from  {left: 100%;}
+  to {left: 1rem;}
+}
+
+@keyframes slideOut {
+  from  {left: 1rem;}
+  to {left: 100%;}
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
+.btn {
+  padding: .5em 1em;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
 }
